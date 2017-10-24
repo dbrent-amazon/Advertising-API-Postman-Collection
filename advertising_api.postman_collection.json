@@ -144,7 +144,7 @@
 						],
 						"body": {},
 						"url": {
-							"raw": "https://{{SANDBOX_URL}}/{{VERSION}}/profiles/2624913731257907",
+							"raw": "https://{{SANDBOX_URL}}/{{VERSION}}/profiles/2624913731257906",
 							"protocol": "https",
 							"host": [
 								"{{SANDBOX_URL}}"

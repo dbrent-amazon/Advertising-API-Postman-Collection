@@ -1,0 +1,645 @@
+{
+	"info": {
+		"name": "Advertising API",
+		"_postman_id": "aa838fd9-d157-8b70-95ac-704b558a3c38",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth Token",
+			"description": "",
+			"item": [
+				{
+					"name": "getAccessToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"ACCESS_TOKEN\", jsonData.access_token);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "refresh_token",
+									"value": "{{REFRESH_TOKEN}}",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{CLIENT_ID}}",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{CLIENT_SECRET}}",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://api.amazon.com/auth/o2/token",
+							"protocol": "https",
+							"host": [
+								"api",
+								"amazon",
+								"com"
+							],
+							"path": [
+								"auth",
+								"o2",
+								"token"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Profiles",
+			"description": "",
+			"item": [
+				{
+					"name": "listProfiles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{SANDBOX_URL}}/{{VERSION}}/profiles",
+							"protocol": "https",
+							"host": [
+								"{{SANDBOX_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"profiles"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getProfile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{SANDBOX_URL}}/{{VERSION}}/profiles/2624913731257907",
+							"protocol": "https",
+							"host": [
+								"{{SANDBOX_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"profiles",
+								"2624913731257907"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "registerProfile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"countryCode\": \"US\"\n}\n"
+						},
+						"url": {
+							"raw": "https://{{SANDBOX_URL}}/{{VERSION}}/profiles/register",
+							"protocol": "https",
+							"host": [
+								"{{SANDBOX_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"profiles",
+								"register"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "updateProfiles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t\t\"profileId\": 958196673868493,\n\t\t\"dailyBudget\": 2.00\n\t}\n]"
+						},
+						"url": {
+							"raw": "https://{{SANDBOX_URL}}/{{VERSION}}/profiles",
+							"protocol": "https",
+							"host": [
+								"{{SANDBOX_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"profiles"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Campaigns",
+			"description": "",
+			"item": [
+				{
+					"name": "listCampaigns",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Amazon-Advertising-API-Scope",
+								"value": "{{PROFILE_ID}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{SANDBOX_URL}}/{{VERSION}}/campaigns",
+							"protocol": "https",
+							"host": [
+								"{{SANDBOX_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"campaigns"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "createCampaigns",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Amazon-Advertising-API-Scope",
+								"value": "{{PROFILE_ID}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t\t\"name\": \"Test Campaign Auto Target\",\n\t\t\"campaignType\": \"sponsoredProducts\",\n\t\t\"targetingType\": \"auto\",\n\t\t\"state\": \"enabled\",\n\t\t\"dailyBudget\": 5.00,\n\t\t\"startDate\": \"20170613\"\n\t}\n]"
+						},
+						"url": {
+							"raw": "https://{{SANDBOX_URL}}/{{VERSION}}/campaigns",
+							"protocol": "https",
+							"host": [
+								"{{SANDBOX_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"campaigns"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "updateCampaigns",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Amazon-Advertising-API-Scope",
+								"value": "{{PROFILE_ID}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t\t\"campaignId\": 127985268700344,\n\t\t\"dailyBudget\": 10.00\n\t}\n]"
+						},
+						"url": {
+							"raw": "https://{{SANDBOX_URL}}/{{VERSION}}/campaigns",
+							"protocol": "https",
+							"host": [
+								"{{SANDBOX_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"campaigns"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ad Groups",
+			"description": "",
+			"item": [
+				{
+					"name": "listAdGroups",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Amazon-Advertising-API-Scope",
+								"value": "{{PROFILE_ID}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{SANDBOX_URL}}/{{VERSION}}/adGroups",
+							"protocol": "https",
+							"host": [
+								"{{SANDBOX_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"adGroups"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "createAdGroups",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Amazon-Advertising-API-Scope",
+								"value": "{{PROFILE_ID}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t\t\"campaignId\": 125289562772556,\n\t\t\"name\": \"Ad Group Test Manual\",\n\t\t\"state\": \"enabled\",\n\t\t\"defaultBid\": 2.00\n\t}\n]"
+						},
+						"url": {
+							"raw": "https://{{SANDBOX_URL}}/{{VERSION}}/adGroups",
+							"protocol": "https",
+							"host": [
+								"{{SANDBOX_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"adGroups"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Biddable Keywords",
+			"description": "",
+			"item": [
+				{
+					"name": "listBiddableKeywords",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Amazon-Advertising-API-Scope",
+								"value": "{{PROFILE_ID}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{SANDBOX_URL}}/{{VERSION}}/keywords",
+							"protocol": "https",
+							"host": [
+								"{{SANDBOX_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"keywords"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "createBiddableKeywords",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Amazon-Advertising-API-Scope",
+								"value": "{{PROFILE_ID}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t\t\"campaignId\": 125289562772556,\n\t\t\"adGroupId\": 277545451503255,\n\t\t\"keywordText\": \"iphone\",\n\t\t\"matchType\": \"exact\",\n\t\t\"state\": \"enabled\"\n\t}\n]"
+						},
+						"url": {
+							"raw": "https://{{SANDBOX_URL}}/{{VERSION}}/keywords",
+							"protocol": "https",
+							"host": [
+								"{{SANDBOX_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"keywords"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Negative Keywords",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Campaign Negative Keywords",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Product Ads",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Bid Recommendations",
+			"description": "",
+			"item": [
+				{
+					"name": "getAdGroupBidRecommendations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Amazon-Advertising-API-Scope",
+								"value": "{{PROFILE_ID}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{SANDBOX_URL}}/{{VERSION}}/adGroups/152115980323637/bidRecommendations",
+							"protocol": "https",
+							"host": [
+								"{{SANDBOX_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"adGroups",
+								"152115980323637",
+								"bidRecommendations"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getKeywordBidRecommendations",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Amazon-Advertising-API-Scope",
+								"value": "{{PROFILE_ID}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{SANDBOX_URL}}/{{VERSION}}/keywords/39774123270965/bidRecommendations",
+							"protocol": "https",
+							"host": [
+								"{{SANDBOX_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"keywords",
+								"39774123270965",
+								"bidRecommendations"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Keyword Suggestions",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Snapshots",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Reports",
+			"description": "",
+			"item": []
+		}
+	]
+}

@@ -1,0 +1,1 @@
+# Advertising-API-Postman-Collection

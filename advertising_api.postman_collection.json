@@ -19,7 +19,8 @@
 								"type": "text/javascript",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"ACCESS_TOKEN\", jsonData.access_token);"
+									"postman.setEnvironmentVariable(\"ACCESS_TOKEN\", jsonData.access_token);",
+									"postman.setEnvironmentVariable(\"REFRESH_TOKEN\", jsonData.refresh_token);"
 								]
 							}
 						}
@@ -271,6 +272,43 @@
 							"path": [
 								"{{VERSION}}",
 								"campaigns"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getCampaign",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACCESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Amazon-Advertising-API-Scope",
+								"value": "{{PROFILE_ID}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{SANDBOX_URL}}/{{VERSION}}/campaigns/135769841724523",
+							"protocol": "https",
+							"host": [
+								"{{SANDBOX_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"campaigns",
+								"135769841724523"
 							]
 						},
 						"description": ""

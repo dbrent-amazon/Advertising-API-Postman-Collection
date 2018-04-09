@@ -29,9 +29,9 @@ Click it to expand its properties.
 
 ![](https://github.com/dbrent-amazon/Advertising-API-Postman-Collection/blob/master/img/manage-env-expand.png)
 
-The only property you should ever need to modify is the PROFILE_ID. It is already set to one that works. The client Id and secret are set to the team development Ids. Feel free to change this to your own. If you do, you will need to generate a new REFRESH_TOKEN.
+Modify the CLIENT_ID, CLIENT_SECRET, PROFILE_ID and REFRESH_TOKEN fields.
 
-Click "Cancel" or "Update" when you are fnished. Before continuing, make sure the Advertising API is the active environment.
+Click "Update" when you are fnished. Before continuing, make sure the Advertising API is the active environment.
 
 ![](https://github.com/dbrent-amazon/Advertising-API-Postman-Collection/blob/master/img/postman-env-selected.png)
 

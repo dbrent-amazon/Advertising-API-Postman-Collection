@@ -25,11 +25,9 @@ Here, you should see the newly imported "Advertising API" environment.
 
 ![](https://github.com/dbrent-amazon/Advertising-API-Postman-Collection/blob/master/img/manage-env-list.png)
 
-Click it to expand its properties.
+Click it to expand its properties and update the CLIENT_ID, CLIENT_SECRET, PROFILE_ID and REFRESH_TOKEN fields with your own.
 
 ![](https://github.com/dbrent-amazon/Advertising-API-Postman-Collection/blob/master/img/manage-env-expand.png)
-
-Modify the CLIENT_ID, CLIENT_SECRET, PROFILE_ID and REFRESH_TOKEN fields.
 
 Click "Update" when you are fnished. Before continuing, make sure the Advertising API is the active environment.
 

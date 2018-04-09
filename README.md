@@ -1,5 +1,7 @@
 
-## Import the Collection
+## Install
+
+#### Import the Collection
 
 To import a collection into Postman, click the Import button.
 
